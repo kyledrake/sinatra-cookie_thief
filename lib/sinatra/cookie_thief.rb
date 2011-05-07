@@ -3,9 +3,9 @@ require File.join(File.join(File.expand_path(File.dirname(__FILE__))), '..', 'ra
 
 module Sinatra
   module CookieThief
-    def self.registered(app)
-      raise ArgumentError, 'Cannot use sessions directly from Sinatra with CookieThief because it needs to happen before Session::Cookie. See the README.' if app.sessions?
-      app.use Rack::CookieThief
+    def setup_sessions(builder)
+      builder.use Rack::CookieThief
+      super
     end
   end
   register CookieThief
