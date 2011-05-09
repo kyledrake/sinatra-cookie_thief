@@ -1,4 +1,5 @@
 ENV['RACK_ENV'] = 'test'
+require 'rubygems'
 require File.join('.', 'lib', 'sinatra', 'cookie_thief.rb')
 require 'test/unit'
 require 'rack/test'
@@ -38,7 +39,7 @@ class TestSinatraCookieThief < Test::Unit::TestCase
     assert last_response.ok?
     assert_nil last_response.headers['Set-Cookie']
   end
-  
+
   def test_cookie_thief_does_not_fail_when_sinatra_internal_session_is_used
     mock_app {
       register Sinatra::CookieThief
